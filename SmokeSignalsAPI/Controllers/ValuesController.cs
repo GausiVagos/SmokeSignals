@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
+using SmokeSignalsAPI.Data;
 
 namespace SmokeSignalsAPI.Controllers
 {
@@ -10,11 +11,18 @@ namespace SmokeSignalsAPI.Controllers
     [ApiController]
     public class ValuesController : ControllerBase
     {
+        private readonly SmokeSignalsContext _context;
+
+        public ValuesController(SmokeSignalsContext context)
+        {
+            _context = context;
+        }
+
         // GET api/values
         [HttpGet]
         public ActionResult<IEnumerable<string>> Get()
         {
-            return new string[] { "value1", "value2" };
+            return new string[] { $"Il y a {_context.Users.Count()} utilisateurs,", $"{_context.Chats.Count()} discussions,", $"et {_context.Messages.Count()} messages." };
         }
 
         // GET api/values/5

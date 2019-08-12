@@ -32,8 +32,7 @@ namespace SmokeSignalsAPI.Controllers
         [HttpGet("{id}")]
         public async Task<ActionResult<Chat>> GetChat(int id)
         {
-            var chat = await _context.Chats.Where(c=>c.ChatId == id).Include(c => c.Users).Include(c=>c.Messages).SingleOrDefaultAsync();
-
+            var chat = await _context.Chats.Include(c => c.Users).Include(c=>c.Messages).SingleOrDefaultAsync(c => c.ChatId == id);
             if (chat == null)
             {
                 return NotFound();
@@ -42,10 +41,10 @@ namespace SmokeSignalsAPI.Controllers
             return chat;
         }
 
-        [HttpGet("fromUser/{userId}")]
-        public async Task<ActionResult<List<Chat>>> GetChatsFromUser(int userId)
+        [HttpGet("ofUser/{userId}")]
+        public async Task<ActionResult<List<Chat>>> GetChatsOfUser(int userId)
         {
-            var chats = await _context.Chats.Where(c => c.Users.Contains(_context.Users.Find(userId))).Include(c=>c.Users).Include(c=>c.Messages).ToListAsync();
+            var chats = await _context.Chats.Where(c => c.Users.Contains(_context.Users.Where(u=>u.UserId == userId).SingleOrDefault())).Include(c=>c.Users).Include(c=>c.Messages).ToListAsync();
 
             return chats;
         }

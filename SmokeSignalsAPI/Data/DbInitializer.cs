@@ -12,13 +12,18 @@ namespace SmokeSignalsAPI.Data
         public static void Initialize(SmokeSignalsContext context)
         {
             context.Database.EnsureCreated();
+            User vagos = new User { UserName = "Vagos", Gender = 'M', Password = "Test", BirthDay = new DateTime(1998, 12, 8), City = "Luttre", LC_Latitude = "50° 30' 59.99\" N", LC_Longitude = "4° 22' 59.99\" E" };
+            Message msg = new Message { User = vagos, MessageContent = "Yo!", Sent = DateTime.Now };
+            Chat chat = new Chat { Subject = "Un simple test", Users = new List<User> { vagos }, Messages = new List<Message> { msg } };
+            if (!context.Users.Any())
+                context.Users.Add(vagos);
 
-            if (context.Users.Any())
-            {
-                return;   // DB has been seeded
-            }
+            if (!context.Messages.Any())
+                context.Messages.Add(msg);
 
-            context.Users.Add(new User {UserName = "Vagos", Gender='M', Password = "Test", BirthDay = new DateTime(1998,12,8) });
+            if (!context.Chats.Any())
+                context.Chats.Add(chat);
+
             context.SaveChanges();
         }
     }
