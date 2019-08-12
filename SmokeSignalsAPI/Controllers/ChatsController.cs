@@ -42,6 +42,14 @@ namespace SmokeSignalsAPI.Controllers
             return chat;
         }
 
+        [HttpGet("fromUser/{userId}")]
+        public async Task<ActionResult<List<Chat>>> GetChatsFromUser(int userId)
+        {
+            var chats = await _context.Chats.Where(c => c.Users.Contains(_context.Users.Find(userId))).Include(c=>c.Users).Include(c=>c.Messages).ToListAsync();
+
+            return chats;
+        }
+
         // PUT: api/Chats/5
         [HttpPut("{id}")]
         public async Task<IActionResult> PutChat(int id, Chat chat)
