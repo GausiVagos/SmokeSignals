@@ -82,6 +82,14 @@ namespace SmokeSignalsAPI.Controllers
             return CreatedAtAction("GetUser", new { id = user.UserId }, user);
         }
 
+        [HttpPost("connect")]
+        public async Task<ActionResult<User>> Connect(User user)
+        {
+            User connected = await _context.Users.Where(u => u.UserName == user.UserName && u.Password == user.Password).SingleOrDefaultAsync();
+
+            return connected;
+        }
+
         // DELETE: api/Users/5
         [HttpDelete("{id}")]
         public async Task<ActionResult<User>> DeleteUser(int id)
