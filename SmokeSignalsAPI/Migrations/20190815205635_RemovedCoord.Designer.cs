@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using SmokeSignalsAPI.Data;
 
 namespace SmokeSignalsAPI.Migrations
 {
     [DbContext(typeof(SmokeSignalsContext))]
-    partial class SmokeSignalsContextModelSnapshot : ModelSnapshot
+    [Migration("20190815205635_RemovedCoord")]
+    partial class RemovedCoord
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -70,10 +72,6 @@ namespace SmokeSignalsAPI.Migrations
                     b.Property<string>("Gender")
                         .IsRequired()
                         .HasConversion(new ValueConverter<string, string>(v => default(string), v => default(string), new ConverterMappingHints(size: 1)));
-
-                    b.Property<double>("LC_Latitude");
-
-                    b.Property<double>("LC_Longitude");
 
                     b.Property<string>("Password");
 
