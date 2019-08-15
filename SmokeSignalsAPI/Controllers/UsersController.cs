@@ -1,8 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using SmokeSignalsAPI.Data;
@@ -86,7 +84,13 @@ namespace SmokeSignalsAPI.Controllers
         public async Task<ActionResult<User>> Connect(User user)
         {
             User connected = await _context.Users.Where(u => u.UserName == user.UserName && u.Password == user.Password).SingleOrDefaultAsync();
-
+            if(connected != null)
+            {
+                connected.LC_Latitude = user.LC_Latitude;
+                connected.LC_Longitude = user.LC_Longitude;
+                await _context.SaveChangesAsync();
+            }
+            
             return connected;
         }
 

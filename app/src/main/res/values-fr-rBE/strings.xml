@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="login">Se connecter</string>
+    <string name="no_account">Pas encore de compte?</string>
+    <string name="password">Votre mot de passe</string>
+    <string name="register">Enregistrez-vous</string>
+    <string name="username">Votre pseudonyme</string>
+    <string name="welcome">Bienvenue! \n Connectez-vous pour profiter de nos services.</string>
+</resources>

@@ -1,0 +1,9 @@
+<resources>
+    <string name="app_name" translatable="false">Smoke Signals</string>
+    <string name="welcome">Welcome! \n Please connect to use our services.</string>
+    <string name="username">Your username</string>
+    <string name="password">Your password</string>
+    <string name="login">Log in</string>
+    <string name="no_account">No account yet?</string>
+    <string name="register">Sign in</string>
+</resources>
