@@ -12,7 +12,6 @@ namespace SmokeSignalsAPI.Models
         public string Password { get; set; }
         public char Gender { get; set; }
         public string City { get; set; }
-        public DateTime BirthDay { get; set; }
         public double LC_Latitude { get; set; }
         public double LC_Longitude { get; set; }
     }

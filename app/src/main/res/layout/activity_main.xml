@@ -16,6 +16,7 @@
                 android:layout_height="wrap_content"
                 android:src="@drawable/logo2"/>
             <TextView
+                android:id="@+id/welcome"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:textSize="20sp"

@@ -6,4 +6,15 @@
     <string name="login">Log in</string>
     <string name="no_account">No account yet?</string>
     <string name="register">Sign in</string>
+    <string name="no_username">Please enter a username.</string>
+    <string name="no_password">Please enter a password.</string>
+    <string name="no_location">Please turn on your GPS.</string>
+    <string name="missing_permission">Missing permission!</string>
+    <string name="api" translatable="false">https://192.168.1.59:45456/api/</string>
+    <string name="access_denied">Access denied.</string>
+    <string name="access_granted">Access granted!</string>
+    <string name="error">What just happened ?!</string>
+    <string name="gender_M">Male</string>
+    <string name="gender_F">Female</string>
+    <string name="gender_U">Unspecified</string>
 </resources>

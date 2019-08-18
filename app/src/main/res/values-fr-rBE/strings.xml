@@ -6,4 +6,14 @@
     <string name="register">Enregistrez-vous</string>
     <string name="username">Votre pseudonyme</string>
     <string name="welcome">Bienvenue! \n Connectez-vous pour profiter de nos services.</string>
+    <string name="no_password">Veuillez entrer un mot de passe.</string>
+    <string name="no_username">Veuillez entrer un pseudonyme.</string>
+    <string name="no_location">Veuillez allumer la géolocalisation.</string>
+    <string name="missing_permission">Il manque une permission!</string>
+    <string name="access_denied">Accès refusé.</string>
+    <string name="access_granted">Accès accordé!</string>
+    <string name="error">Qu\'est-ce qu\'il s\'est passé ?!</string>
+    <string name="gender_M">Homme</string>
+    <string name="gender_F">Femme</string>
+    <string name="gender_U">Indéterminé</string>
 </resources>

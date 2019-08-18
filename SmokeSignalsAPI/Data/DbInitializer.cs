@@ -12,7 +12,7 @@ namespace SmokeSignalsAPI.Data
         public static void Initialize(SmokeSignalsContext context)
         {
             context.Database.EnsureCreated();
-            User vagos = new User { UserName = "Vagos", Gender = 'M', Password = "Test", BirthDay = new DateTime(1998, 12, 8), City = "Luttre" };
+            User vagos = new User { UserName = "Vagos", Gender = 'M', Password = "Test", City = "Luttre" };
             Message msg = new Message { User = vagos, MessageContent = "Yo!", Sent = DateTime.Now };
             Chat chat = new Chat { Subject = "Un simple test", Users = new List<User> { vagos }, Messages = new List<Message> { msg } };
             if (!context.Users.Any())

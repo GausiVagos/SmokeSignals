@@ -84,14 +84,15 @@ namespace SmokeSignalsAPI.Controllers
         public async Task<ActionResult<User>> Connect(User user)
         {
             User connected = await _context.Users.Where(u => u.UserName == user.UserName && u.Password == user.Password).SingleOrDefaultAsync();
-            if(connected != null)
+            if (connected != null)
             {
                 connected.LC_Latitude = user.LC_Latitude;
                 connected.LC_Longitude = user.LC_Longitude;
                 await _context.SaveChangesAsync();
+                return connected;
             }
-            
-            return connected;
+            else
+                return BadRequest();
         }
 
         // DELETE: api/Users/5

@@ -5,104 +5,91 @@ import java.util.Date;
 public class User
 {
     // Fields
-    private int UserId;
-    private String UserName;
-    private String Password;
-    private String Gender;
-    private String City;
-    private Date BirthDay;
-    private String LC_Latitude;
-    private String LC_Longitude;
+    private int userId;
+    private String userName;
+    private String password;
+    private char gender;
+    private String city;
+    private double lC_Latitude;
+    private double lC_Longitude;
 
     //Constructors
     public User(){}
 
-    public User(String userName, String password, String LC_Latitude, String LC_Longitude) {
-        UserName = userName;
-        Password = password;
-        this.LC_Latitude = LC_Latitude;
-        this.LC_Longitude = LC_Longitude;
+    public User(String userName, String password, double LC_Latitude, double LC_Longitude) {
+        this.userName = userName;
+        this.password = password;
+        this.lC_Latitude = LC_Latitude;
+        this.lC_Longitude = LC_Longitude;
     }
 
-    public User(int userId, String userName, String password, String gender, String city, Date birthDay, String LC_Latitude, String LC_Longitude) {
-        UserId = userId;
-        UserName = userName;
-        Password = password;
-        Gender = gender;
-        City = city;
-        BirthDay = birthDay;
-        this.LC_Latitude = LC_Latitude;
-        this.LC_Longitude = LC_Longitude;
+    public User(int userId, String userName, String password, char gender, String city, double LC_Latitude, double LC_Longitude) {
+        this.userId = userId;
+        this.userName = userName;
+        this.password = password;
+        this.gender = gender;
+        this.city = city;
+        this.lC_Latitude = LC_Latitude;
+        this.lC_Longitude = LC_Longitude;
     }
 
     //Getters
 
     public int getUserId()
     {
-        return UserId;
+        return userId;
     }
 
     public String getUserName()
     {
-        return UserName;
+        return userName;
     }
 
     public String getPassword() {
-        return Password;
+        return password;
     }
 
-    public String getGender() {
-        return Gender;
+    public char getGender() {
+        return gender;
     }
 
     public String getCity() {
-        return City;
+        return city;
     }
 
-    public Date getBirthDay() {
-        return BirthDay;
+    public double getLC_Latitude() {
+        return lC_Latitude;
     }
 
-    public String getLC_Latitude() {
-        return LC_Latitude;
-    }
-
-    public String getLC_Longitude() {
-        return LC_Longitude;
+    public double getLC_Longitude() {
+        return lC_Longitude;
     }
 
     //Setters
 
     public void setUserId(int userId) {
-        UserId = userId;
+        this.userId = userId;
     }
 
     public void setUserName(String userName) {
-        UserName = userName;
+        this.userName = userName;
     }
 
     public void setPassword(String password) {
-        Password = password;
+        this.password = password;
     }
 
-    public void setGender(String gender) {
-        Gender = gender;
-    }
+    public void setGender(char gender) { this.gender = gender; }
 
     public void setCity(String city) {
-        City = city;
+        this.city = city;
     }
 
-    public void setBirthDay(Date birthDay) {
-        BirthDay = birthDay;
+    public void setLC_Latitude(double LC_Latitude) {
+        this.lC_Latitude = LC_Latitude;
     }
 
-    public void setLC_Latitude(String LC_Latitude) {
-        this.LC_Latitude = LC_Latitude;
-    }
-
-    public void setLC_Longitude(String LC_Longitude) {
-        this.LC_Longitude = LC_Longitude;
+    public void setLC_Longitude(double LC_Longitude) { this.lC_Longitude = LC_Longitude;
     }
 
     @Override
@@ -110,8 +97,8 @@ public class User
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         User user = (User) o;
-        return UserId == user.UserId &&
-                UserName.equals(user.UserName);
+        return userId == user.userId &&
+                userName.equals(user.userName);
     }
 
 }
