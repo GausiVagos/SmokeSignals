@@ -40,6 +40,14 @@ namespace SmokeSignalsAPI.Controllers
             return user;
         }
 
+        [HttpGet("cities")]
+        public async Task<ActionResult<List<string>>> GetCities(int id)
+        {
+            List<string> cities = await _context.Users.Select(u => u.City).Distinct().ToListAsync();
+
+            return cities;
+        }
+
         // PUT: api/Users/5
         [HttpPut("{id}")]
         public async Task<IActionResult> PutUser(int id, User user)

@@ -1,5 +1,7 @@
 package com.example.simon.models;
 
+import com.google.gson.Gson;
+
 import java.util.Date;
 
 public class User
@@ -19,6 +21,16 @@ public class User
     public User(String userName, String password, double LC_Latitude, double LC_Longitude) {
         this.userName = userName;
         this.password = password;
+        this.lC_Latitude = LC_Latitude;
+        this.lC_Longitude = LC_Longitude;
+    }
+
+    public User(String userName, String password, char gender, String city, double LC_Latitude, double LC_Longitude)
+    {
+        this.userName = userName;
+        this.password = password;
+        this.gender = gender;
+        this.city = city;
         this.lC_Latitude = LC_Latitude;
         this.lC_Longitude = LC_Longitude;
     }
@@ -101,4 +113,9 @@ public class User
                 userName.equals(user.userName);
     }
 
+    @Override
+    public String toString()
+    {
+        return new Gson().toJson(this);
+    }
 }

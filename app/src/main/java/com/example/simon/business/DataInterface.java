@@ -24,4 +24,7 @@ public interface DataInterface {
 
     @POST("users")
     Call<User> post(@Body User user);
+
+    @GET("users/cities")
+    Call<String[]> getCities();
 }

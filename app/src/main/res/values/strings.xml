@@ -1,8 +1,8 @@
 <resources>
     <string name="app_name" translatable="false">Smoke Signals</string>
-    <string name="welcome">Welcome! \n Please connect to use our services.</string>
-    <string name="username">Your username</string>
-    <string name="password">Your password</string>
+    <string name="please_connect">Welcome! \n Please connect to use our services.</string>
+    <string name="ask_username">Your username</string>
+    <string name="ask_password">Your password</string>
     <string name="login">Log in</string>
     <string name="no_account">No account yet?</string>
     <string name="register">Sign in</string>
@@ -17,4 +17,16 @@
     <string name="gender_M">Male</string>
     <string name="gender_F">Female</string>
     <string name="gender_U">Unspecified</string>
+    <string name="welcome_message">"Welcome, "</string>
+    <string name="sign_out">Sign out</string>
+    <string name="bad_identifiers">Invalid identifiers, \n please retry.</string>
+    <string name="ask_conf_password">Confirm your password</string>
+    <string name="ask_gender">Your gender :</string>
+    <string name="ask_fields">Please fill in the following fields :</string>
+    <string name="ask_city">Your city</string>
+    <string name="select_a_city">Select a city</string>
+    <string name="cancel">Cancel</string>
+    <string name="no_city_found">No city found.</string>
+    <string name="missing_fields">Please complete all fields.</string>
+    <string name="password_mismatch">The passwords don\'t match.</string>
 </resources>

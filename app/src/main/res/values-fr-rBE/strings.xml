@@ -2,10 +2,10 @@
 <resources>
     <string name="login">Se connecter</string>
     <string name="no_account">Pas encore de compte?</string>
-    <string name="password">Votre mot de passe</string>
-    <string name="register">Enregistrez-vous</string>
-    <string name="username">Votre pseudonyme</string>
-    <string name="welcome">Bienvenue! \n Connectez-vous pour profiter de nos services.</string>
+    <string name="ask_password">Votre mot de passe</string>
+    <string name="register">Créer un compte</string>
+    <string name="ask_username">Votre pseudonyme</string>
+    <string name="please_connect">Bienvenue! \n Connectez-vous pour profiter de nos services.</string>
     <string name="no_password">Veuillez entrer un mot de passe.</string>
     <string name="no_username">Veuillez entrer un pseudonyme.</string>
     <string name="no_location">Veuillez allumer la géolocalisation.</string>
@@ -16,4 +16,16 @@
     <string name="gender_M">Homme</string>
     <string name="gender_F">Femme</string>
     <string name="gender_U">Indéterminé</string>
+    <string name="welcome_message">"Bienvenue, "</string>
+    <string name="sign_out">Se déconnecter</string>
+    <string name="bad_identifiers">Identifiants incorrects, \n veuillez réessayer.</string>
+    <string name="ask_conf_password">Confirmez votre mot de passe</string>
+    <string name="ask_gender">Votre genre :</string>
+    <string name="ask_fields">Veuillez compléter les champs suivants :</string>
+    <string name="ask_city">Votre ville</string>
+    <string name="select_a_city">Sélectionner une ville</string>
+    <string name="cancel">Annuler</string>
+    <string name="no_city_found">Aucune ville trouvée.</string>
+    <string name="missing_fields">Veuillez remplir tous les champs.</string>
+    <string name="password_mismatch">Les mots de passe ne correspondent pas.</string>
 </resources>
