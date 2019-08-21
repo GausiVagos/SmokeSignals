@@ -1,18 +1,17 @@
 package com.example.simon.models;
-import com.example.simon.models.*;
 
-import java.util.Collection;
+import com.google.gson.Gson;
+
 import java.util.HashSet;
-import java.util.Iterator;
 import java.util.Set;
 
 public class Chat
 {
     //Fields
-    private int ChatId;
-    private String Subject;
-    private Set<User> Users;
-    private Set<Message> Messages;
+    private int chatId;
+    private String subject;
+    private Set<User> users;
+    private Set<Message> messages;
 
     //Constructors
 
@@ -20,50 +19,56 @@ public class Chat
     }
 
     public Chat(String subject, Set<User> users) {
-        Subject = subject;
-        Users = users;
-        Messages = new HashSet<>();
+        this.subject = subject;
+        this.users = users;
+        messages = new HashSet<>();
     }
 
     public Chat(int chatId, String subject, Set<User> users, Set<Message> messages) {
-        ChatId = chatId;
-        Subject = subject;
-        Users = users;
-        Messages = messages;
+        this.chatId = chatId;
+        this.subject = subject;
+        this.users = users;
+        this.messages = messages;
     }
 
     // Setters and getters
 
 
     public int getChatId() {
-        return ChatId;
+        return chatId;
     }
 
     public void setChatId(int chatId) {
-        ChatId = chatId;
+        this.chatId = chatId;
     }
 
     public String getSubject() {
-        return Subject;
+        return subject;
     }
 
     public void setSubject(String subject) {
-        Subject = subject;
+        this.subject = subject;
     }
 
     public Set<User> getUsers() {
-        return Users;
+        return users;
     }
 
     public void setUsers(Set<User> users) {
-        Users = users;
+        this.users = users;
     }
 
     public Set<Message> getMessages() {
-        return Messages;
+        return messages;
     }
 
     public void setMessages(Set<Message> messages) {
-        Messages = messages;
+        this.messages = messages;
+    }
+
+    @Override
+    public String toString() {
+        Gson gson = new Gson();
+        return gson.toJson(this);
     }
 }

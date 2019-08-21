@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using SmokeSignalsAPI.Data;
 
 namespace SmokeSignalsAPI.Migrations
 {
     [DbContext(typeof(SmokeSignalsContext))]
-    partial class SmokeSignalsContextModelSnapshot : ModelSnapshot
+    [Migration("20190820223124_removedSent")]
+    partial class removedSent
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -42,8 +44,6 @@ namespace SmokeSignalsAPI.Migrations
 
                     b.Property<string>("MessageContent");
 
-                    b.Property<string>("Sent");
-
                     b.Property<int?>("UserId");
 
                     b.HasKey("MessageId");
@@ -55,24 +55,13 @@ namespace SmokeSignalsAPI.Migrations
                     b.ToTable("Messages");
                 });
 
-            modelBuilder.Entity("SmokeSignalsAPI.Models.Participation", b =>
-                {
-                    b.Property<int>("UserId");
-
-                    b.Property<int>("ChatId");
-
-                    b.HasKey("UserId", "ChatId");
-
-                    b.HasIndex("ChatId");
-
-                    b.ToTable("Participations");
-                });
-
             modelBuilder.Entity("SmokeSignalsAPI.Models.User", b =>
                 {
                     b.Property<int>("UserId")
                         .ValueGeneratedOnAdd()
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<int?>("ChatId");
 
                     b.Property<string>("City");
 
@@ -90,6 +79,8 @@ namespace SmokeSignalsAPI.Migrations
 
                     b.HasKey("UserId");
 
+                    b.HasIndex("ChatId");
+
                     b.ToTable("Users");
                 });
 
@@ -104,17 +95,11 @@ namespace SmokeSignalsAPI.Migrations
                         .HasForeignKey("UserId");
                 });
 
-            modelBuilder.Entity("SmokeSignalsAPI.Models.Participation", b =>
+            modelBuilder.Entity("SmokeSignalsAPI.Models.User", b =>
                 {
-                    b.HasOne("SmokeSignalsAPI.Models.Chat", "Chat")
+                    b.HasOne("SmokeSignalsAPI.Models.Chat")
                         .WithMany("Users")
-                        .HasForeignKey("ChatId")
-                        .OnDelete(DeleteBehavior.Cascade);
-
-                    b.HasOne("SmokeSignalsAPI.Models.User", "User")
-                        .WithMany("Chats")
-                        .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Cascade);
+                        .HasForeignKey("ChatId");
                 });
 #pragma warning restore 612, 618
         }

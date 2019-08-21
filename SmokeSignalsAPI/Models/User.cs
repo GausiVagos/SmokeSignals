@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
 
 namespace SmokeSignalsAPI.Models
 {
@@ -14,5 +11,6 @@ namespace SmokeSignalsAPI.Models
         public string City { get; set; }
         public double LC_Latitude { get; set; }
         public double LC_Longitude { get; set; }
+        public List<Participation> Chats { get; set; }
     }
 }

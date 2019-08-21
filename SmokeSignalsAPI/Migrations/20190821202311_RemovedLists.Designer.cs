@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using SmokeSignalsAPI.Data;
 
 namespace SmokeSignalsAPI.Migrations
 {
     [DbContext(typeof(SmokeSignalsContext))]
-    partial class SmokeSignalsContextModelSnapshot : ModelSnapshot
+    [Migration("20190821202311_RemovedLists")]
+    partial class RemovedLists
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -55,19 +57,6 @@ namespace SmokeSignalsAPI.Migrations
                     b.ToTable("Messages");
                 });
 
-            modelBuilder.Entity("SmokeSignalsAPI.Models.Participation", b =>
-                {
-                    b.Property<int>("UserId");
-
-                    b.Property<int>("ChatId");
-
-                    b.HasKey("UserId", "ChatId");
-
-                    b.HasIndex("ChatId");
-
-                    b.ToTable("Participations");
-                });
-
             modelBuilder.Entity("SmokeSignalsAPI.Models.User", b =>
                 {
                     b.Property<int>("UserId")
@@ -102,19 +91,6 @@ namespace SmokeSignalsAPI.Migrations
                     b.HasOne("SmokeSignalsAPI.Models.User", "User")
                         .WithMany()
                         .HasForeignKey("UserId");
-                });
-
-            modelBuilder.Entity("SmokeSignalsAPI.Models.Participation", b =>
-                {
-                    b.HasOne("SmokeSignalsAPI.Models.Chat", "Chat")
-                        .WithMany("Users")
-                        .HasForeignKey("ChatId")
-                        .OnDelete(DeleteBehavior.Cascade);
-
-                    b.HasOne("SmokeSignalsAPI.Models.User", "User")
-                        .WithMany("Chats")
-                        .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Cascade);
                 });
 #pragma warning restore 612, 618
         }

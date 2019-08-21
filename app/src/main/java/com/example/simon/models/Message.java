@@ -1,66 +1,64 @@
 package com.example.simon.models;
-import java.util.Date;
-import java.util.Objects;
 
-import com.example.simon.models.User;
+import java.util.Date;
 
 public class Message {
     //Fields
-    private int MessageId;
-    private String MessageContent;
-    private Date Sent;
-    private User User;
+    private int messageId;
+    private String messageContent;
+    private String sent;
+    private User user;
 
     // Constructors
 
     public Message() {
     }
 
-    public Message(String messageContent, Date sent, User user) {
-        MessageContent = messageContent;
-        Sent = sent;
-        User = user;
+    public Message(String messageContent, String sent, User user) {
+        this.messageContent = messageContent;
+        this.sent = sent;
+        this.user = user;
     }
 
-    public Message(int messageId, String messageContent, Date sent, User user) {
-        MessageId = messageId;
-        MessageContent = messageContent;
-        Sent = sent;
-        User = user;
+    public Message(int messageId, String messageContent, String sent, User user) {
+        this.messageId = messageId;
+        this.messageContent = messageContent;
+        this.sent = sent;
+        this.user = user;
     }
 
     // Getters and setters
 
     public int getMessageId() {
-        return MessageId;
+        return messageId;
     }
 
     public void setMessageId(int messageId) {
-        MessageId = messageId;
+        this.messageId = messageId;
     }
 
     public String getMessageContent() {
-        return MessageContent;
+        return messageContent;
     }
 
     public void setMessageContent(String messageContent) {
-        MessageContent = messageContent;
+        this.messageContent = messageContent;
     }
 
-    public Date getSent() {
-        return Sent;
+    public String getSent() {
+        return sent;
     }
 
-    public void setSent(Date sent) {
-        Sent = sent;
+    public void setSent(String sent) {
+        this.sent = sent;
     }
 
     public com.example.simon.models.User getUser() {
-        return User;
+        return user;
     }
 
     public void setUser(com.example.simon.models.User user) {
-        User = user;
+        this.user = user;
     }
 
 }

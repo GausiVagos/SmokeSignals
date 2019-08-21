@@ -1,8 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using SmokeSignalsAPI.Data;
@@ -32,7 +30,7 @@ namespace SmokeSignalsAPI.Controllers
         [HttpGet("{id}")]
         public async Task<ActionResult<Chat>> GetChat(int id)
         {
-            var chat = await _context.Chats.Include(c => c.Users).Include(c=>c.Messages).SingleOrDefaultAsync(c => c.ChatId == id);
+            var chat = await _context.Chats.Include(c=>c.Messages).Include(c=>c.Users).ThenInclude(c=>c.Select(p=>p.User)).SingleOrDefaultAsync(c => c.ChatId == id);
             if (chat == null)
             {
                 return NotFound();
@@ -41,14 +39,15 @@ namespace SmokeSignalsAPI.Controllers
             return chat;
         }
 
+        
         [HttpGet("ofUser/{userId}")]
         public async Task<ActionResult<List<Chat>>> GetChatsOfUser(int userId)
         {
-            var chats = await _context.Chats.Where(c => c.Users.Contains(_context.Users.Where(u=>u.UserId == userId).SingleOrDefault())).Include(c=>c.Users).Include(c=>c.Messages).ToListAsync();
+            var chats = await _context.Participations.Where(p => p.UserId == userId).Select(p => p.Chat).ToListAsync();
 
             return chats;
         }
-
+        
         // PUT: api/Chats/5
         [HttpPut("{id}")]
         public async Task<IActionResult> PutChat(int id, Chat chat)
@@ -59,6 +58,18 @@ namespace SmokeSignalsAPI.Controllers
             }
 
             _context.Entry(chat).State = EntityState.Modified;
+            
+            if(chat.Users!=null && chat.Users.Count!=0)
+                foreach(Participation p in chat.Users)
+                {
+                    _context.Entry(p.User).State = EntityState.Modified;
+                }
+            
+            if(chat.Messages!=null && chat.Messages.Count!=0)
+                foreach (Message m in chat.Messages)
+                {
+                    _context.Entry(m).State = EntityState.Modified;
+                }
 
             try
             {
