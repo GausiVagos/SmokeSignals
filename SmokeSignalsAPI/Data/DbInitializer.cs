@@ -10,10 +10,11 @@ namespace SmokeSignalsAPI.Data
         public static void Initialize(SmokeSignalsContext context)
         {
             context.Database.EnsureCreated();
-            User vagos = new User { UserName = "Vagos", Gender = 'M', Password = "Test", City = "Luttre" };
-            //Chat chat = new Chat { Subject = "Un simple test", Users = new List<User> { vagos } };
-            if (!context.Users.Any())
-                context.Users.Add(vagos);
+
+            Participation p = new Participation { ChatId = 1, UserId = 1 };
+
+            if (!context.Participations.Any())
+                context.Participations.Add(p);
 
             context.SaveChanges();
         }

@@ -76,6 +76,7 @@ public class WelcomeActivity extends AppCompatActivity {
                             public void onClick(View v) {
                                 Intent intent = new Intent(WelcomeActivity.this, ChatActivity.class);
                                 intent.putExtra("Chat",chat.toString());
+                                intent.putExtra("User", new Gson().toJson(user));
                                 startActivity(intent);
                             }
                         });

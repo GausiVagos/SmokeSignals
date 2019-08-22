@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.RadioGroup;
 import android.widget.Toast;
@@ -28,6 +29,7 @@ public class RegisterActivity extends AppCompatActivity {
     RadioGroup rg_gender;
     EditText et_city;
     DataInterface api;
+    Button btn_signIn;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,6 +42,7 @@ public class RegisterActivity extends AppCompatActivity {
         et_city = findViewById(R.id.city);
         Retrofit retrofit = new Retrofit.Builder().baseUrl(getString(R.string.api)).addConverterFactory(GsonConverterFactory.create()).build();
         api = retrofit.create(DataInterface.class);
+        btn_signIn = findViewById(R.id.btn_signIn);
     }
 
     public void selectCity(View v)
@@ -89,6 +92,7 @@ public class RegisterActivity extends AppCompatActivity {
             }
             else
             {
+                btn_signIn.setVisibility(View.GONE);
                 User user = new User(userName,password,gender,city,lastKnownLocation.getLatitude(),lastKnownLocation.getLongitude());
                 register(user);
             }
@@ -104,6 +108,7 @@ public class RegisterActivity extends AppCompatActivity {
                 if(!response.isSuccessful())
                 {
                     Toast.makeText(RegisterActivity.this, R.string.error, Toast.LENGTH_LONG).show();
+                    btn_signIn.setVisibility(View.VISIBLE);
                     return;
                 }
 
@@ -120,6 +125,7 @@ public class RegisterActivity extends AppCompatActivity {
             @Override
             public void onFailure(Call<User> call, Throwable t) {
                 Toast.makeText(RegisterActivity.this, R.string.error, Toast.LENGTH_LONG).show();
+                btn_signIn.setVisibility(View.VISIBLE);
             }
         });
     }

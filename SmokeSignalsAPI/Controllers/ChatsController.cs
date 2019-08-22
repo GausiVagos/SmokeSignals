@@ -21,37 +21,52 @@ namespace SmokeSignalsAPI.Controllers
 
         // GET: api/Chats
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<Chat>>> GetChats()
+        public async Task<ActionResult<List<ClientChat>>> GetChats()
         {
-            return await _context.Chats.ToListAsync();
+            List<Chat> chats = await _context.Chats.ToListAsync();
+            List<ClientChat> list = new List<ClientChat>();
+            foreach(Chat c in chats)
+            {
+                list.Add(new ClientChat(c, _context, true));
+            }
+
+            return list;
         }
 
         // GET: api/Chats/5
         [HttpGet("{id}")]
-        public async Task<ActionResult<Chat>> GetChat(int id)
+        public async Task<ActionResult<ClientChat>> GetChat(int id)
         {
-            var chat = await _context.Chats.Include(c=>c.Messages).Include(c=>c.Users).ThenInclude(c=>c.Select(p=>p.User)).SingleOrDefaultAsync(c => c.ChatId == id);
+            var chat = await _context.Chats.Include(c=>c.Messages).Include(c=>c.Users).SingleOrDefaultAsync(c => c.ChatId == id);
+            var clientChat = new ClientChat(chat, _context, true);
+
             if (chat == null)
             {
                 return NotFound();
             }
 
-            return chat;
+            return clientChat;
         }
 
         
         [HttpGet("ofUser/{userId}")]
-        public async Task<ActionResult<List<Chat>>> GetChatsOfUser(int userId)
+        public async Task<ActionResult<List<ClientChat>>> GetChatsOfUser(int userId)
         {
-            var chats = await _context.Participations.Where(p => p.UserId == userId).Select(p => p.Chat).ToListAsync();
-
-            return chats;
+            var chats = await _context.Participations.Where(p => p.UserId == userId).Select(p => p.Chat).Include(c=>c.Messages).Include(c=>c.Users).ToListAsync();
+            List<ClientChat> list = new List<ClientChat>();
+            foreach(Chat c in chats)
+            {
+                list.Add(new ClientChat(c, _context, true));
+            }
+            return list;
         }
         
         // PUT: api/Chats/5
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutChat(int id, Chat chat)
+        public async Task<IActionResult> PutChat(int id, ClientChat cc)
         {
+            Chat chat = new Chat(cc, true);
+
             if (id != chat.ChatId)
             {
                 return BadRequest();
@@ -59,9 +74,14 @@ namespace SmokeSignalsAPI.Controllers
 
             _context.Entry(chat).State = EntityState.Modified;
             
+
             if(chat.Users!=null && chat.Users.Count!=0)
                 foreach(Participation p in chat.Users)
                 {
+                    _context.Entry(p).State = EntityState.Modified;
+                    Participation similar = _context.Participations.Where(pa => pa.ChatId == p.ChatId && pa.UserId == p.UserId).FirstOrDefault();
+                    if (similar == default)
+                        _context.Participations.Add(p);
                     _context.Entry(p.User).State = EntityState.Modified;
                 }
             

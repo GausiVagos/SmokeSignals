@@ -1,5 +1,8 @@
 package com.example.simon.models;
 
+import android.content.Context;
+
+import com.example.simon.smokesignals.R;
 import com.google.gson.Gson;
 
 import java.util.HashSet;
@@ -71,4 +74,25 @@ public class Chat
         Gson gson = new Gson();
         return gson.toJson(this);
     }
+
+    /*
+    public String userString(User you, Context context)
+    {
+        String[] names = new String[getUsers().size()];
+        for(int i=0; i<getUsers().size(); i++)
+        {
+            names[i] = ((User)getUsers().toArray()[i]).getUserName();
+        }
+        String us = "";
+
+        for(int i =0; i<names.length;i++)
+        {
+            String name = names[i].equals(you.getUserName()) ? context.getString(R.string.you) : names[i];
+            us+=name += i<=names.length-2 ? ", " : i==names.length-1 ? context.getString(R.string.and) : ".";
+        }
+
+
+        return us;
+    }
+    */
 }

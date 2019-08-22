@@ -3,6 +3,7 @@ package com.example.simon.models;
 import com.google.gson.Gson;
 
 import java.util.Date;
+import java.util.Set;
 
 public class User
 {
@@ -14,6 +15,7 @@ public class User
     private String city;
     private double lC_Latitude;
     private double lC_Longitude;
+    private Set<Chat> chats;
 
     //Constructors
     public User(){}
@@ -102,6 +104,14 @@ public class User
     }
 
     public void setLC_Longitude(double LC_Longitude) { this.lC_Longitude = LC_Longitude;
+    }
+
+    public Set<Chat> getChats() {
+        return chats;
+    }
+
+    public void setChats(Set<Chat> chats) {
+        this.chats = chats;
     }
 
     @Override

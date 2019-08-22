@@ -28,16 +28,18 @@ namespace SmokeSignalsAPI.Controllers
 
         // GET: api/Users/5
         [HttpGet("{id}")]
-        public async Task<ActionResult<User>> GetUser(int id)
+        public async Task<ActionResult<ClientUser>> GetUser(int id)
         {
-            var user = await _context.Users.FindAsync(id);
+            var user = await _context.Users.Include(u => u.Chats).FirstOrDefaultAsync(u=>u.UserId == id);
 
             if (user == null)
             {
                 return NotFound();
             }
 
-            return user;
+            ClientUser cu = new ClientUser(user, _context, true);
+
+            return cu;
         }
 
         [HttpGet("cities")]
@@ -89,7 +91,7 @@ namespace SmokeSignalsAPI.Controllers
         }
 
         [HttpPost("connect")]
-        public async Task<ActionResult<User>> Connect(User user)
+        public async Task<ActionResult<ClientUser>> Connect(User user)
         {
             User connected = await _context.Users.Where(u => u.UserName == user.UserName && u.Password == user.Password).SingleOrDefaultAsync();
             if (connected != null)
@@ -97,7 +99,8 @@ namespace SmokeSignalsAPI.Controllers
                 connected.LC_Latitude = user.LC_Latitude;
                 connected.LC_Longitude = user.LC_Longitude;
                 await _context.SaveChangesAsync();
-                return connected;
+                ClientUser cu = new ClientUser(connected, _context, true);
+                return cu;
             }
             else
                 return BadRequest();
