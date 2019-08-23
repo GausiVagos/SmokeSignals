@@ -1,21 +1,31 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:orientation="horizontal" >
-    <RelativeLayout
+    android:layout_height="120dp"
+    android:layout_marginBottom="30dp"
+    android:background="@color/lightGray">
+    <TextView
+        android:id="@+id/tv_subject"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
-        <TextView
-            android:id="@+id/tv_subject"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:maxWidth="200dp"/>
-        <Button
-            android:id="@+id/btn_messages"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/messages"
-            android:layout_alignParentRight="true"/>
-    </RelativeLayout>
-</LinearLayout>
+        android:layout_height="wrap_content"
+        android:textSize="25sp"
+        android:maxHeight="69sp"
+        android:textColor="@color/orange"/>
+    <Button
+        android:id="@+id/btn_messages"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/messages"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentEnd="true"
+        android:background="@color/beige"/>
+    <TextView
+        android:id="@+id/tv_names"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:textSize="20sp"
+        android:maxWidth="210sp"
+        android:maxHeight="50sp"/>
+</RelativeLayout>

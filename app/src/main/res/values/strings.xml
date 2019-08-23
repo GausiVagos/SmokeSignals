@@ -32,6 +32,7 @@
     <string name="your_chats">Your chats :</string>
     <string name="no_chat">No chat found.</string>
     <string name="messages" translatable="false">Messages</string>
-    <string name="you">You.</string>
-    <string name="and">and</string>
+    <string name="you">You</string>
+    <string name="and">" and "</string>
+    <string name="send_message">Send message</string>
 </resources>

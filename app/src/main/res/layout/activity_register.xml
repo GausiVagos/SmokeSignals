@@ -10,12 +10,13 @@
         android:layout_height="wrap_content"
         android:orientation="vertical">
         <TextView
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="@string/ask_fields"
             android:textSize="20sp"
             android:layout_gravity="center"
-            android:paddingTop="25dp"/>
+            android:padding="15dp"
+            android:background="@color/darkBeige"/>
         <EditText
             android:id="@+id/username"
             android:layout_width="300dp"
@@ -73,28 +74,30 @@
                     android:checked="true" />
             </RadioGroup>
         </LinearLayout>
-        <LinearLayout
+        <RelativeLayout
             android:layout_width="300dp"
             android:layout_height="wrap_content"
-            android:orientation="horizontal"
             android:layout_gravity="center">
             <EditText
                 android:id="@+id/city"
                 android:layout_width="150dp"
                 android:layout_height="wrap_content"
-                android:hint="@string/ask_city"/>
+                android:hint="@string/ask_city"
+                android:maxWidth="150dp"
+                android:maxHeight="70dp"/>
             <Button
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/select_a_city"
-                android:layout_marginLeft="5dp"
-                android:onClick="selectCity"/>
-        </LinearLayout>
+                android:onClick="selectCity"
+                android:layout_alignParentRight="true"
+                android:layout_alignParentEnd="true"/>
+        </RelativeLayout>
         <Button
             android:id="@+id/btn_signIn"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:background="@android:color/holo_green_light"
+            android:background="@color/orange"
             android:layout_gravity="center"
             android:layout_marginTop="20dp"
             android:text="@string/register"

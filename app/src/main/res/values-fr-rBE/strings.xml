@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="login">Se connecter</string>
-    <string name="no_account">Pas encore de compte?</string>
+    <string name="no_account">Pas encore inscrit?</string>
     <string name="ask_password">Votre mot de passe</string>
     <string name="register">Créer un compte</string>
     <string name="ask_username">Votre pseudonyme</string>
@@ -30,5 +30,7 @@
     <string name="password_mismatch">Les mots de passe ne correspondent pas.</string>
     <string name="your_chats">Vos conversations :</string>
     <string name="no_chat">Aucune discussion trouvée.</string>
-    <string name="you">Vous.</string>
+    <string name="you">Vous</string>
+    <string name="and">" et "</string>
+    <string name="send_message">Envoyer le message</string>
 </resources>

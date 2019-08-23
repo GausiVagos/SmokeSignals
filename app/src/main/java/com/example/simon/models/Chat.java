@@ -75,24 +75,18 @@ public class Chat
         return gson.toJson(this);
     }
 
-    /*
+
     public String userString(User you, Context context)
     {
-        String[] names = new String[getUsers().size()];
-        for(int i=0; i<getUsers().size(); i++)
-        {
-            names[i] = ((User)getUsers().toArray()[i]).getUserName();
-        }
         String us = "";
-
-        for(int i =0; i<names.length;i++)
+        User[] users =  getUsers().toArray(new User[getUsers().size()]);
+        for(int i=0;i<users.length;i++)
         {
-            String name = names[i].equals(you.getUserName()) ? context.getString(R.string.you) : names[i];
-            us+=name += i<=names.length-2 ? ", " : i==names.length-1 ? context.getString(R.string.and) : ".";
+            String name = users[i].getUserName().equals(you.getUserName()) ? context.getString(R.string.you) : users[i].getUserName();
+            us = us.concat(name).concat(i<=users.length-3 ? ", " : i==users.length-2 ? context.getString(R.string.and) : ".");
         }
-
 
         return us;
     }
-    */
+
 }

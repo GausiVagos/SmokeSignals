@@ -46,7 +46,7 @@ public class WelcomeActivity extends AppCompatActivity {
         Retrofit retrofit = new Retrofit.Builder().baseUrl(getString(R.string.api)).addConverterFactory(GsonConverterFactory.create()).build();
         api = retrofit.create(DataInterface.class);
 
-        fillList(user);
+        fillList();
     }
 
     public void signOut(View v)
@@ -54,9 +54,9 @@ public class WelcomeActivity extends AppCompatActivity {
         finish();
     }
 
-    private void fillList(User u)
+    private void fillList()
     {
-        Call<Chat[]> call = api.getChatsOfUser(u.getUserId());
+        Call<Chat[]> call = api.getChatsOfUser(user.getUserId());
         call.enqueue(new Callback<Chat[]>() {
             @Override
             public void onResponse(Call<Chat[]> call, Response<Chat[]> response) {
@@ -71,7 +71,7 @@ public class WelcomeActivity extends AppCompatActivity {
                     for(int i = 0; i<chats.length;i++)
                     {
                         final Chat chat = chats[i];
-                        ChatLine line = new ChatLine(WelcomeActivity.this, chats[i], new View.OnClickListener() {
+                        ChatLine line = new ChatLine(WelcomeActivity.this, user,chats[i], new View.OnClickListener() {
                             @Override
                             public void onClick(View v) {
                                 Intent intent = new Intent(WelcomeActivity.this, ChatActivity.class);
