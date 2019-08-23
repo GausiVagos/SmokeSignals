@@ -20,7 +20,7 @@ public class MessageLignRight extends RelativeLayout {
     {
         super(context);
         LayoutInflater inflater = LayoutInflater.from(context);
-        inflater.inflate(R.layout.message_line_left, this);
+        inflater.inflate(R.layout.message_line_right, this);
 
         message = _message;
         User user = message.getUser();

@@ -120,8 +120,27 @@ namespace SmokeSignalsAPI.Controllers
             return CreatedAtAction("GetChat", new { id = chat.ChatId }, chat);
         }
 
-        // DELETE: api/Chats/5
-        [HttpDelete("{id}")]
+        [HttpPost("{id}/addMessage")]
+        public async Task<ActionResult<List<ClientMessage>>> AddMessage(int id, ClientMessage message)
+        {
+            Chat chat = await _context.Chats.FindAsync(id);
+            if (chat == null)
+                return null;
+
+            Message msg = new Message(message);
+            if (chat.Messages == null)
+                chat.Messages = new List<Message>();
+
+            _context.Messages.Attach(msg);
+            chat.Messages.Add(msg);
+            await _context.SaveChangesAsync();
+
+            List<ClientMessage> messages = (await GetChat(id)).Value.Messages.OrderBy(m => m.MessageId).ToList();
+            return messages;
+        }
+
+    // DELETE: api/Chats/5
+    [HttpDelete("{id}")]
         public async Task<ActionResult<Chat>> DeleteChat(int id)
         {
             var chat = await _context.Chats.FindAsync(id);

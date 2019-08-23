@@ -2,8 +2,10 @@ package com.example.simon.business;
 
 import com.example.simon.models.Chat;
 import com.example.simon.models.User;
+import com.example.simon.models.Message;
 
 import java.util.List;
+import java.util.Set;
 
 import retrofit2.Call;
 import retrofit2.http.Body;
@@ -31,4 +33,7 @@ public interface DataInterface {
     // Chat methods
     @GET("chats/ofUser/{userId}")
     Call<Chat[]> getChatsOfUser(@Path("userId") int userId);
+
+    @POST("chats/{chatId}/addMessage")
+    Call<Set<Message>> addMessage(@Path("chatId") int chatId, @Body Message message);
 }
