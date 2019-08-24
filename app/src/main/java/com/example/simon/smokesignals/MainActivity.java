@@ -100,6 +100,8 @@ public class MainActivity extends AppCompatActivity{
                 String json = connected.toString();
 
                 // Call the next activity
+                et_userName.setText("");
+                et_password.setText("");
                 Intent intent = new Intent(getApplicationContext(), WelcomeActivity.class);
                 intent.putExtra("User", json);
                 startActivity(intent);
