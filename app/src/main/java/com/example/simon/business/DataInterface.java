@@ -36,4 +36,8 @@ public interface DataInterface {
 
     @POST("chats/{chatId}/addMessage")
     Call<Set<Message>> addMessage(@Path("chatId") int chatId, @Body Message message);
+
+    // Messages methods
+    @GET("messages/ofChat/{chatId}")
+    Call<Set<Message>> getChatMessages(@Path("chatId") int chatId);
 }

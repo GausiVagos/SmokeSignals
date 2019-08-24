@@ -21,14 +21,21 @@ namespace SmokeSignalsAPI.Controllers
 
         // GET: api/Messages
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<Message>>> GetMessages()
+        public async Task<ActionResult<IEnumerable<ClientMessage>>> GetMessages()
         {
-            return await _context.Messages.Include(m=>m.User).ToListAsync();
+            List<Message> list = await _context.Messages.Include(m=>m.User).ToListAsync();
+            List<ClientMessage> list2 = new List<ClientMessage>();
+            foreach(Message m in list)
+            {
+                list2.Add(new ClientMessage(m, _context));
+            }
+
+            return list2;
         }
 
         // GET: api/Messages/5
         [HttpGet("{id}")]
-        public async Task<ActionResult<Message>> GetMessage(int id)
+        public async Task<ActionResult<ClientMessage>> GetMessage(int id)
         {
             var message = await _context.Messages.Where(m=>m.MessageId == id).Include(m=>m.User).SingleOrDefaultAsync();
 
@@ -37,7 +44,29 @@ namespace SmokeSignalsAPI.Controllers
                 return NotFound();
             }
 
-            return message;
+            ClientMessage clm = new ClientMessage(message, _context);
+
+            return clm;
+        }
+
+        [HttpGet("ofChat/{chatId}")]
+        public async Task<ActionResult<List<ClientMessage>>> FromChat(int chatId)
+        {
+            Chat chat = _context.Chats.Where(c => c.ChatId == chatId).Include(c=>c.Messages).SingleOrDefault();
+            if (chat == null)
+                return null;
+
+            List<Message> messages = chat.Messages.OrderBy(m=>m.MessageId).ToList();
+            if (chat.Messages == null)
+                return null;
+
+            List<ClientMessage> clientMessages = new List<ClientMessage>();
+            foreach(Message m in messages)
+            {
+                clientMessages.Add(new ClientMessage(m, _context));
+            }
+
+            return clientMessages;
         }
 
         // PUT: api/Messages/5
