@@ -79,6 +79,9 @@ public class ChatActivity extends AppCompatActivity {
 
     public void fillList(Set<Message> messages)
     {
+        if(messages == null)
+            return;
+
         li_messages.removeAllViews();
         for(Message m : messages)
         {
@@ -95,7 +98,7 @@ public class ChatActivity extends AppCompatActivity {
         if(!msgContent.isEmpty())
         {
             btn_msg.setVisibility(View.INVISIBLE);
-            DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy 'à' HH:mm");
+            DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy '@' HH:mm");
             Date date = new Date();
             Message msg = new Message(msgContent, dateFormat.format(date), user);
 

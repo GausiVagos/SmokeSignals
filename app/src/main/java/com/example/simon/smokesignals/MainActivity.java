@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -31,6 +32,7 @@ public class MainActivity extends AppCompatActivity{
     Location location;
     static final MediaType JSON = MediaType.parse("application/json; charset=utf-8");
     DataInterface api;
+    Button btn_connect;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,6 +41,7 @@ public class MainActivity extends AppCompatActivity{
         et_userName = findViewById(R.id.username);
         et_password = findViewById(R.id.password);
         tv_welcome = findViewById(R.id.welcome);
+        btn_connect = findViewById(R.id.btn_connect);
 
         if (ContextCompat.checkSelfPermission(MainActivity.this, Manifest.permission.ACCESS_FINE_LOCATION)
                 != PackageManager.PERMISSION_GRANTED)
@@ -84,6 +87,7 @@ public class MainActivity extends AppCompatActivity{
 
     private void connect(User toConnect)
     {
+        btn_connect.setVisibility(View.INVISIBLE);
         Call<User> call = api.connect(toConnect);
         call.enqueue(new Callback<User>() {
             @Override
@@ -93,6 +97,7 @@ public class MainActivity extends AppCompatActivity{
                     String message = response.code()==400 ? getString(R.string.bad_identifiers) : getString(R.string.error);
 
                     tv_welcome.setText(message);
+                    btn_connect.setVisibility(View.VISIBLE);
                     return;
                 }
 
@@ -102,6 +107,7 @@ public class MainActivity extends AppCompatActivity{
                 // Call the next activity
                 et_userName.setText("");
                 et_password.setText("");
+                btn_connect.setVisibility(View.VISIBLE);
                 Intent intent = new Intent(getApplicationContext(), WelcomeActivity.class);
                 intent.putExtra("User", json);
                 startActivity(intent);
@@ -109,7 +115,7 @@ public class MainActivity extends AppCompatActivity{
 
             @Override
             public void onFailure(Call<User> call, Throwable t) {
-                tv_welcome.setText(t.getMessage());
+                tv_welcome.setText(R.string.error);
             }
         });
     }

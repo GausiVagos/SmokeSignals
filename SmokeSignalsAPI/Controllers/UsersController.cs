@@ -82,12 +82,16 @@ namespace SmokeSignalsAPI.Controllers
 
         // POST: api/Users
         [HttpPost]
-        public async Task<ActionResult<User>> PostUser(User user)
+        public async Task<ActionResult<ClientUser>> PostUser(User user)
         {
+            User similar = await _context.Users.FirstOrDefaultAsync(u => u.UserName == user.UserName);
+            if (similar != null)
+                return BadRequest();
+
             _context.Users.Add(user);
             await _context.SaveChangesAsync();
 
-            return CreatedAtAction("GetUser", new { id = user.UserId }, user);
+            return new ClientUser(user, _context, true);
         }
 
         [HttpPost("connect")]
@@ -110,10 +114,20 @@ namespace SmokeSignalsAPI.Controllers
         [HttpDelete("{id}")]
         public async Task<ActionResult<User>> DeleteUser(int id)
         {
-            var user = await _context.Users.FindAsync(id);
+            var user = await _context.Users.Include(u => u.Chats).FirstOrDefaultAsync(u => u.UserId == id);
             if (user == null)
             {
                 return NotFound();
+            }
+
+            foreach(Participation p in user.Chats)
+            {
+                _context.Participations.Remove(p);
+            }
+            List<Message> messages = await _context.Messages.Where(m=>m.User.UserId == user.UserId).ToListAsync();
+            foreach(Message m in messages)
+            {
+                _context.Messages.Remove(m);
             }
 
             _context.Users.Remove(user);

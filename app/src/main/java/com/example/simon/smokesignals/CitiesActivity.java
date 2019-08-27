@@ -45,7 +45,7 @@ public class CitiesActivity extends AppCompatActivity {
         call.enqueue(new Callback<String[]>() {
             @Override
             public void onResponse(Call<String[]> call, Response<String[]> response) {
-                if(!response.isSuccessful() || response==null || response.body().length == 0)
+                if(!response.isSuccessful() || response.body()==null || response.body().length == 0)
                 {
                     tv.setVisibility(View.VISIBLE);
                 }

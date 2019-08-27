@@ -107,7 +107,8 @@ public class RegisterActivity extends AppCompatActivity {
             public void onResponse(Call<User> call, Response<User> response) {
                 if(!response.isSuccessful())
                 {
-                    Toast.makeText(RegisterActivity.this, R.string.error, Toast.LENGTH_LONG).show();
+                    int idMsg = response.code() == 400? R.string.username_taken : R.string.error;
+                    Toast.makeText(RegisterActivity.this, idMsg, Toast.LENGTH_LONG).show();
                     btn_signIn.setVisibility(View.VISIBLE);
                     return;
                 }

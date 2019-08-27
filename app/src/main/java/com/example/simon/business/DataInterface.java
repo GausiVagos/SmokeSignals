@@ -16,10 +16,7 @@ import retrofit2.http.Path;
 public interface DataInterface {
     // User methods
     @GET("users")
-    Call<List<User>> getUsers();
-
-    @GET("users/{userId}")
-    Call<List<User>> getUser(@Path("userId") int userId);
+    Call<Set<User>> getUsers();
 
     @POST("users/connect")
     Call<User> connect(@Body User user);
@@ -31,6 +28,9 @@ public interface DataInterface {
     Call<String[]> getCities();
 
     // Chat methods
+    @POST("chats")
+    Call<Chat> post(@Body Chat chat);
+
     @GET("chats/ofUser/{userId}")
     Call<Chat[]> getChatsOfUser(@Path("userId") int userId);
 

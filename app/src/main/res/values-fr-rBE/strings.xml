@@ -12,7 +12,7 @@
     <string name="missing_permission">Il manque une permission!</string>
     <string name="access_denied">Accès refusé.</string>
     <string name="access_granted">Accès accordé!</string>
-    <string name="error">Qu\'est-ce qu\'il s\'est passé ?!</string>
+    <string name="error">Quelque chose a mal tourné... veuillez réessayer.</string>
     <string name="gender_M">Homme</string>
     <string name="gender_F">Femme</string>
     <string name="gender_U">Indéterminé</string>
@@ -34,4 +34,13 @@
     <string name="and">" et "</string>
     <string name="send_message">Envoyer le message</string>
     <string name="actualize">Actualiser</string>
+    <string name="add_chat">Ajouter une conversation</string>
+    <string name="subject">Le sujet de cette conversation</string>
+    <string name="users_to_add">Sélectionnez les utilisateurs avec lesquels vous souhaitez partager cette conversation.</string>
+    <string name="add_the_chat">"Créer la conversation "</string>
+    <string name="no_user_found">Aucun utilisateur trouvé.</string>
+    <string name="add">Ajouter</string>
+    <string name="added">Ajouté</string>
+    <string name="no_subject">Veuillez spécifier le sujet de cette conversation.</string>
+    <string name="username_taken">Ce pseudonyme est déjà utilisé. Veuillez en choisir un autre.</string>
 </resources>

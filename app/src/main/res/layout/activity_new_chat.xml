@@ -3,39 +3,46 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".WelcomeActivity">
-
+    tools:context=".NewChatActivity">
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical">
         <TextView
-            android:id="@+id/tv_welcome"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/welcome_message"
-            android:textSize="25sp"
+            android:text="@string/ask_fields"
+            android:textSize="20sp"
             android:gravity="center"
+            android:padding="15dp"
             android:background="@color/darkBeige"/>
+        <EditText
+            android:id="@+id/et_subject"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:maxLines="2"
+            android:hint="@string/subject"/>
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/your_chats"
-            android:textSize="22sp"
-            android:background="@color/lightGray"/>
-        <TextView
-            android:id="@+id/tv_no_chat"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="@string/no_chat"
+            android:padding="5sp"
+            android:textSize="20sp"
+            android:background="@color/lightGray"
             android:gravity="center"
-            android:visibility="gone"/>
+            android:text="@string/users_to_add"/>
+        <TextView
+            android:id="@+id/tv_no_user"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/no_user_found"
+            android:gravity="center"
+            android:visibility="gone"
+            android:background="@color/female"/>
         <android.support.v4.widget.NestedScrollView
             android:layout_width="match_parent"
-            android:layout_height="390dp"
-            android:layout_marginTop="30dp">
+            android:layout_height="280dp">
             <LinearLayout
-                android:id="@+id/list_chats"
+                android:id="@+id/li_users"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical">
@@ -43,27 +50,28 @@
         </android.support.v4.widget.NestedScrollView>
         <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="50dp"
+            android:padding="5sp">
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true"
+                android:background="@color/female"
+                android:text="@string/cancel"
+                android:padding="5sp"
+                android:onClick="cancel"/>
             <Button
                 android:id="@+id/btn_addChat"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/add_chat"
-                android:background="@color/male"
-                android:layout_alignParentLeft="true"
-                android:layout_alignParentStart="true"
-                android:onClick="addChat"
-                android:padding="5dp"/>
-            <Button
-                android:id="@+id/btn_signOut"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/sign_out"
-                android:background="@color/female"
                 android:layout_alignParentRight="true"
                 android:layout_alignParentEnd="true"
-                android:onClick="signOut"
-                android:padding="5dp"/>
+                android:background="@color/other"
+                android:text="@string/add_the_chat"
+                android:padding="5sp"
+                android:onClick="addChat"/>
         </RelativeLayout>
     </LinearLayout>
+
 </ScrollView>

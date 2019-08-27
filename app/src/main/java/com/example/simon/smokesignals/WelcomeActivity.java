@@ -54,24 +54,40 @@ public class WelcomeActivity extends AppCompatActivity {
         finish();
     }
 
+    public void addChat(View v)
+    {
+        Intent intent = new Intent(this, NewChatActivity.class);
+        intent.putExtra("User", new Gson().toJson(user));
+        startActivity(intent);
+    }
+
+    @Override
+    protected void onRestart()
+    {
+        super.onRestart();
+        fillList();
+    }
+
     private void fillList()
     {
         Call<Chat[]> call = api.getChatsOfUser(user.getUserId());
         call.enqueue(new Callback<Chat[]>() {
             @Override
             public void onResponse(Call<Chat[]> call, Response<Chat[]> response) {
-                if(!response.isSuccessful() || response==null || response.body().length == 0)
+                if(!response.isSuccessful() || response.body().length == 0)
                 {
                     tv_no_chat.setVisibility(View.VISIBLE);
                 }
                 else
                 {
+                    list_chats.removeAllViews();
                     final Chat[] chats = response.body();
 
                     for(int i = 0; i<chats.length;i++)
                     {
                         final Chat chat = chats[i];
-                        ChatLine line = new ChatLine(WelcomeActivity.this, user,chats[i], new View.OnClickListener() {
+                        ChatLine line = new ChatLine(WelcomeActivity.this, user,chats[i], new View.OnClickListener()
+                        {
                             @Override
                             public void onClick(View v) {
                                 Intent intent = new Intent(WelcomeActivity.this, ChatActivity.class);

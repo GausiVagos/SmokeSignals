@@ -13,7 +13,7 @@
     <string name="api" translatable="false">https://192.168.1.59:45456/api/</string>
     <string name="access_denied">Access denied.</string>
     <string name="access_granted">Access granted!</string>
-    <string name="error">What just happened ?!</string>
+    <string name="error">Something went wrong... please try again.</string>
     <string name="gender_M">Male</string>
     <string name="gender_F">Female</string>
     <string name="gender_U">Unspecified</string>
@@ -36,4 +36,13 @@
     <string name="and">" and "</string>
     <string name="send_message">Send message</string>
     <string name="actualize">Actualize</string>
+    <string name="add_chat">Add a chat</string>
+    <string name="subject">The subject of this chat</string>
+    <string name="users_to_add">Select the users you want to have this chat with.</string>
+    <string name="add_the_chat">Add the chat</string>
+    <string name="no_user_found">No user were found.</string>
+    <string name="add">Add</string>
+    <string name="added">Added</string>
+    <string name="no_subject">Please specify the subject to this chat.</string>
+    <string name="username_taken">This username is already taken. Please choose another one.</string>
 </resources>

@@ -112,12 +112,21 @@ namespace SmokeSignalsAPI.Controllers
 
         // POST: api/Chats
         [HttpPost]
-        public async Task<ActionResult<Chat>> PostChat(Chat chat)
+        public async Task<ActionResult<ClientChat>> PostChat(ClientChat clientChat)
         {
+            Chat chat = new Chat(clientChat, true);
+            List<Participation> parts = chat.Users;
+            chat.Users = null;
             _context.Chats.Add(chat);
+
+            foreach(Participation p in parts)
+            {
+                _context.Participations.Attach(p);
+            }
+
             await _context.SaveChangesAsync();
 
-            return CreatedAtAction("GetChat", new { id = chat.ChatId }, chat);
+            return new ClientChat(chat, _context, true);
         }
 
         [HttpPost("{id}/addMessage")]
@@ -125,7 +134,7 @@ namespace SmokeSignalsAPI.Controllers
         {
             Chat chat = await _context.Chats.FindAsync(id);
             if (chat == null)
-                return null;
+                return NotFound();
 
             Message msg = new Message(message);
             if (chat.Messages == null)
@@ -143,13 +152,18 @@ namespace SmokeSignalsAPI.Controllers
     [HttpDelete("{id}")]
         public async Task<ActionResult<Chat>> DeleteChat(int id)
         {
-            var chat = await _context.Chats.FindAsync(id);
+            var chat = await _context.Chats.Include(c=>c.Messages).FirstOrDefaultAsync(m=>m.ChatId == id);
             if (chat == null)
             {
                 return NotFound();
             }
 
+            foreach (Message m in chat.Messages)
+            {
+                _context.Remove(m);
+            }
             _context.Chats.Remove(chat);
+
             await _context.SaveChangesAsync();
 
             return chat;
